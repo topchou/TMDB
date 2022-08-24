@@ -34,9 +34,6 @@ interface ApiService {
     @GET("3/authentication/token/new")
     fun getToken(@Query("api_key") apiKey: String): Call<TokenResult>
 
-    @GET("authenticate/{token}/allow")
-    fun approve(@Path("token") token: String): Call<AuthenticateResult>
-
     @POST("3/authentication/session/new")
     fun getSession(
         @Query("api_key") apiKey: String,
@@ -45,15 +42,14 @@ interface ApiService {
 
     @GET("3/account/{account_id}/favorite/movies")
     fun getFavoriteMovies(
+        @Path("account_id") account_id: String,
         @Query("api_key") apiKey: String,
         @Query("session_id") sessionId: String?,
     ): Call<FavoriteMoviesResult>
 
-
-    ///account/{account_id}/favorite
-    //@POST("account/ted84523/favorite")
-    @POST("3/account/ted84523/favorite")
+    @POST("3/account/{account_id}/favorite")
     fun markAsFavorite(
+        @Path("account_id") account_id: String,
         @Body bodyFavorite: PopularBody?,
         @Query("api_key") apiKey: String?,
         @Query("session_id") sessionId: String?,

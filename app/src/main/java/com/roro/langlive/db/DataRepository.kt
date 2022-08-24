@@ -33,7 +33,6 @@ class DataRepository private constructor(private val mDatabase: AppDatabase) {
     }
 
     init {
-        //requestToken()
         requestMovies()
     }
 
@@ -120,7 +119,7 @@ class DataRepository private constructor(private val mDatabase: AppDatabase) {
         Log.d(TAG, "markFavorite id = ${movie.movieId} , sessionId = $sessionId, movie.isFavorite =${movie.isFavorite}")
         val markMovie = PopularBody("movie", movie.movieId, !(movie.isFavorite))
         //Todo check Token not expire
-        MovieApi.retrofitService.markAsFavorite(markMovie, BuildConfig.API_KEY, sessionId)
+        MovieApi.retrofitService.markAsFavorite(BuildConfig.AccountId, markMovie, BuildConfig.API_KEY, sessionId)
             ?.enqueue(object : Callback<MarkFavoriteResult?> {
                 override fun onResponse(
                     call: Call<MarkFavoriteResult?>,
@@ -132,15 +131,12 @@ class DataRepository private constructor(private val mDatabase: AppDatabase) {
                         GlobalScope.launch {
                             markDbFavorite(movie.movieId, !movie.isFavorite)
                         }
-
                     }
-
                 }
 
                 override fun onFailure(call: Call<MarkFavoriteResult?>, t: Throwable) {
                     TODO("Not yet implemented")
                 }
-
             })
     }
 

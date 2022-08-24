@@ -16,11 +16,6 @@ import com.roro.langlive.databinding.FragmentMovieListBinding
 import com.roro.langlive.model.MovieModel
 import com.roro.langlive.viewModel.MovieListViewModel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MovieListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MovieListFragment : Fragment() {
     private var binding: FragmentMovieListBinding? = null
     private val viewModel: MovieListViewModel by lazy {
@@ -58,7 +53,7 @@ class MovieListFragment : Fragment() {
     }
 
     private val mMovieClickCallback = object : MovieClickCallback {
-        override fun onClick(movieId: Int, postPath:String) {
+        override fun onClick(movieId: Int, postPath: String) {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                 (requireActivity() as MainActivity).show(movieId, postPath)
             }

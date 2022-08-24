@@ -49,9 +49,6 @@ class MoviesFragmentAdapter(private val mMovieClickCallback: MovieClickCallback?
             .load("https://image.tmdb.org/t/p/w500/"
                     + movie.posterPath)
             .into(holder.binding.previewImage)
-        //holder.binding.previewImage.drawable = movie.
-
-
     }
 
     override fun getItemCount(): Int {

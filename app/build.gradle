@@ -27,20 +27,20 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         def API_KEY = properties.getProperty('apiKey')
-        def sessionId = properties.getProperty('sessionId')
+        def account_id = properties.getProperty('account_id')
         //end Load
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "API_KEY", API_KEY) //Can get Value by buildConfig
-            buildConfigField("String", "sessionId", sessionId) //Can get Value by buildConfig
+            buildConfigField("String", "AccountId", account_id) //Can get Value by buildConfig
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "API_KEY", API_KEY) //Can get Value by buildConfig
-            buildConfigField("String", "sessionId", sessionId) //Can get Value by buildConfig
+            buildConfigField("String", "AccountId", account_id) //Can get Value by buildConfig
         }
     }
     compileOptions {
