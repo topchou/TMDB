@@ -1,6 +1,7 @@
 # TMDB
 
 - Follow below steps to setup.
+- Click movie cover can move to detail page.
  
 ## Step
 
