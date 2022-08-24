@@ -37,6 +37,7 @@ class MovieDetailFragment() : Fragment() {
         val model = ViewModelProvider(this, factory)[MovieViewModel::class.java]
         binding.lifecycleOwner = viewLifecycleOwner
         binding.movieViewModel = model
+        binding.markFavoriteCallback = mMarkFavoriteClickCallback
 
         // ImageView: Using Glide Library
         Glide.with(this)
@@ -52,6 +53,13 @@ class MovieDetailFragment() : Fragment() {
          * I choice to use argument for keeping posterPath,
          * but I think it should have other better implement solution here.
          */
+    }
+
+    private val mMarkFavoriteClickCallback = object : MarkFavoriteClickCallback {
+        override fun onClick(movie: MovieModel) {
+            binding.movieViewModel?.markFavorite(movie)
+            Log.d(MovieListFragment.TAG, "2movie isFavorite = ${movie.isFavorite}")
+        }
     }
 
     companion object {

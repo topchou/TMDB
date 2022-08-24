@@ -8,6 +8,9 @@
         <variable
             name="movieViewModel"
             type="com.roro.langlive.viewModel.MovieViewModel" />
+        <variable
+            name="markFavoriteCallback"
+            type="com.roro.langlive.ui.MarkFavoriteClickCallback" />
     </data>
 
     <ScrollView
@@ -65,7 +68,8 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginEnd="15dp"
-                android:src="@drawable/unlike"
+                android:src="@{movieViewModel.movie.favorite? @drawable/like : @drawable/unlike}"
+                android:onClick="@{() ->  markFavoriteCallback.onClick(movieViewModel.movie)}"
                 app:layout_constraintBottom_toBottomOf="@+id/title_frame"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/title_frame">

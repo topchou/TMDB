@@ -126,7 +126,7 @@ class DataRepository private constructor(private val mDatabase: AppDatabase) {
                     response: Response<MarkFavoriteResult?>,
                 ) {
                     Log.d(TAG, "markFavorite response.code = ${response.code()} !!! ")
-                    if (response.code() == 201) {
+                    if (response.code() == 200 || response.code() == 201) {
                         Log.d(TAG, "Mark favorite success")
                         GlobalScope.launch {
                             markDbFavorite(movie.movieId, !movie.isFavorite)
