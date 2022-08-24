@@ -12,7 +12,7 @@ class FavoriteMoviesResult {
     @Expose
     var movies: List<MovieModel>? = null
     override fun toString(): String {
-        return "Popular Movies Response ={ {$movies}}"
+        return "Favorite Movies Response ={ {$movies}}"
     }
 
 }

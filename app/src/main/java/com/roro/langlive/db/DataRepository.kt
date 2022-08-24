@@ -77,6 +77,7 @@ class DataRepository private constructor(private val mDatabase: AppDatabase) {
                     if (response.code() == 200) {
                         Log.d(TAG, "session = ${response.body().toString()}")
                         sessionId = response.body()?.sessionId ?: "no"
+                        requestFavorites()
                     }
                 }
 
@@ -111,15 +112,47 @@ class DataRepository private constructor(private val mDatabase: AppDatabase) {
             })
     }
 
-    fun requestFavorites(){
-        //Todo: getFavoriteMovies
+    fun requestFavorites() {
+        MovieApi.retrofitService.getFavoriteMovies(
+            BuildConfig.AccountId,
+            BuildConfig.API_KEY,
+            sessionId
+        ).enqueue(object : Callback<FavoriteMoviesResult> {
+            override fun onResponse(
+                call: Call<FavoriteMoviesResult>,
+                response: Response<FavoriteMoviesResult>
+            ) {
+                if (response.code() == 200) {
+                    Log.d(TAG, "response.body = ${response.body().toString()}")
+                    GlobalScope.launch {
+                        response.body()?.movies?.forEach { movie ->
+                            mDatabase.movieDao().updateFavorite(movie.movieId, true)
+                        }
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<FavoriteMoviesResult>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     fun markFavorite(movie: MovieModel) {
-        Log.d(TAG, "markFavorite id = ${movie.movieId} , sessionId = $sessionId, movie.isFavorite =${movie.isFavorite}")
+        Log.d(
+            TAG,
+            "markFavorite id = ${movie.movieId} , sessionId = $sessionId, movie.isFavorite =${movie.isFavorite}"
+        )
         val markMovie = PopularBody("movie", movie.movieId, !(movie.isFavorite))
         //Todo check Token not expire
-        MovieApi.retrofitService.markAsFavorite(BuildConfig.AccountId, markMovie, BuildConfig.API_KEY, sessionId)
+        MovieApi.retrofitService.markAsFavorite(
+            BuildConfig.AccountId,
+            markMovie,
+            BuildConfig.API_KEY,
+            sessionId
+        )
             ?.enqueue(object : Callback<MarkFavoriteResult?> {
                 override fun onResponse(
                     call: Call<MarkFavoriteResult?>,
