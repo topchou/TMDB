@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="movie"
+            type="com.roro.langlive.model.MovieModel" />
+
+        <variable
+            name="callback"
+            type="com.roro.langlive.ui.MovieClickCallback" />
+
+        <variable
+            name="markFavoriteCallback"
+            type="com.roro.langlive.ui.MarkFavoriteClickCallback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp">
+
+
+        <ImageView
+            android:id="@+id/preview_image"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:onClick="@{() ->  callback.onClick(movie.movieId, movie.posterPath)}"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+
+        <FrameLayout
+            android:id="@+id/title_frame"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="6dp"
+            android:onClick="@{() ->  markFavoriteCallback.onClick(movie)}"
+            app:layout_constraintEnd_toEndOf="@+id/favorite_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/preview_image">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:text="title"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+
+            </TextView>
+
+        </FrameLayout>
+
+
+        <ImageView
+            android:id="@+id/favorite_btn"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="15dp"
+            android:src="@{movie.favorite? @drawable/like : @drawable/unlike}"
+            app:layout_constraintBottom_toBottomOf="@+id/title_frame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title_frame">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:text="release_date"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_frame"></TextView>
+
+        <TextView
+            android:id="@+id/movieOverView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="overView"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/release_date">
+
+        </TextView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

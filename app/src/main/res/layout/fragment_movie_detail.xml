@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="movieViewModel"
+            type="com.roro.langlive.viewModel.MovieViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp">
+
+
+            <ImageView
+                android:id="@+id/preview_image"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+
+
+            <FrameLayout
+                android:id="@+id/title_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                app:layout_constraintEnd_toStartOf="@+id/favorite_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/preview_image">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:text="@{movieViewModel.movie.title}"
+                    android:textColor="@color/black"
+                    android:textSize="30dp">
+
+                </TextView>
+
+            </FrameLayout>
+
+
+            <ImageView
+                android:id="@+id/favorite_btn"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/unlike"
+                app:layout_constraintBottom_toBottomOf="@+id/title_frame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title_frame">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:text="@{movieViewModel.movie.releaseDate}"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_frame"></TextView>
+
+
+            <TextView
+                android:id="@+id/origin_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="@{movieViewModel.movie.originalLanguage}"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/release_date"
+                app:layout_constraintEnd_toStartOf="@+id/vote_average"
+                app:layout_constraintTop_toBottomOf="@+id/title_frame">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/vote_average"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="1"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/release_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_frame">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/overviewTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Overview:"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/release_date">
+
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/movieOverView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:text="@{movieViewModel.movie.movieOverview}"
+                android:textColor="#6C6565"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/overviewTxt">
+
+            </TextView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
